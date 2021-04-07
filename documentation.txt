@@ -1,0 +1,118 @@
+PHP SIGN UP SIGN IN RESTful API-documentaion
+
+#Download and extract files from gitHub to your local server directory
+#MySQL Database Setup
+	
+	CREATE DATABASE php_rest_api
+	CREATE TABLE IF NOT EXISTS `users` (
+	 `id` int(11) NOT NULL AUTO_INCREMENT,
+ 	`firstname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+ 	`lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+	 `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+	 `password` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`role` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+	 PRIMARY KEY (`id`),
+	 UNIQUE KEY `email` (`email`)
+	) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+	CREATE TABLE IF NOT EXISTS `support_tickets` (
+	 `id` int(11) NOT NULL AUTO_INCREMENT,
+	`user_id` int(11) NOT NULL ,
+	 `message` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+	 PRIMARY KEY (`id`)
+	) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
+FOR TESTING RESTful API
+	KINDLY DOWNLOAD AND INSTALL POSTMAN APP
+	https://www.postman.com/downloads/
+
+
+
+	/-------------------------------For testing sign Up API please follow the below steps----------------/
+
+	1:Method POST should select from POSTMAN
+	2:http://localhost/php-signup-signin-api/signup.php this is the url
+	3:In the body the json for 2 users are below
+		//for admin
+		{
+    		"firstname":"admin",
+    		"lastname":"fastech",
+    		"email":"admin@email.com",
+    		"password":"admin_pwd",
+    		"role":"admin"
+		}
+
+		//for user
+		{
+    		"firstname":"sujana",
+    		"lastname":"buhari",
+    		"email":"sujana@email.com",
+    		"password":"sujana_123",
+    		"role":"user"
+		}
+	4:For validation remove values from JSON and send request
+
+
+
+
+	/-------------------------------For testing sign in API please follow the below steps----------------/
+
+	1:Method POST should select from POSTMAN
+	2:http://localhost/php-signup-signin-api/signin.php this is the url
+	3:In the body the json we can test with the above created users
+		//json
+		{
+    		"email":"sujana@email.com",
+    		"password":"sujana_123"
+		}
+
+	*******************In response the JWT token created and sending to client**************************
+	4:For validation remove values from JSON and send request
+
+
+
+
+
+	/-------------------------------For testing edit API please follow the below steps----------------/
+	1:Method POST should select from POSTMAN
+	2:http://localhost/php-signup-signin-api/edit.php this is the url
+	3:In the body the json we can test with the below
+		{
+		"id":2,
+		"firstname":"sujana_edit",
+		"lastname":"buhari_edit"
+		}
+
+	************In response the JWT token created again as the values changes and sending to client**************
+	4:For validation remove values from JSON and send request
+
+
+	/-------------------------------For testing support_ticket API please follow the below steps----------------/
+	1:Method POST should select from POSTMAN
+	2:http://localhost/php-signup-signin-api/support_tickets.php this is the url
+	3:In the body the json we can test with the below
+		{
+		"user_id":2,
+		"message":"test support message for me.Hope for the best"
+
+		}
+
+	*************************************for authentication token is checking**************************************
+	4:For validation remove values from JSON and send request
+
+
+	/-------------------------------For testing list of support tickets to only Admin API please follow the below steps----------------/
+	1:Method POST should select from POSTMAN
+	2:http://localhost/php-signup-signin-api/list_support_tickets.php this is the url
+	Only admin user can see the tickets
+	3:Token sending as Authorization Bearer in header in POSTMAN
+
+	*************************************for authentication token is checking**************************************
+
+
+
+	//-----------------------------April 08 2021---------------------------------------------------------------
+
+	
